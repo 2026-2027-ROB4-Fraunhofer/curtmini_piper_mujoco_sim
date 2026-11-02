@@ -1,0 +1,35 @@
+# MuJoCo-specific settings. Robot geometry, joints, limits and inertias come from the URDF.
+
+physics:
+  timestep: 0.002          # s
+  integrator: implicitfast
+  cone: elliptic
+
+floor:
+  friction: [1.0, 0.005, 0.0001]   # sliding, torsional, rolling
+
+base:
+  # Skid steering uses roller wheels. With free rollers the turning slip is nearly proportional
+  # to the turn rate, so wheel_separation_multiplier (extra_controllers.yaml) corrects odometry.
+  wheel_kv: 50.0           # velocity actuator gain, N*m*s/rad
+  wheel_max_torque: 40.0   # N*m
+  rollers:
+    count: 24              # per wheel
+    friction: [1.0, 0.005, 0.0001]
+    axle_friction: 0.0     # N*m; higher values give more lateral grip and slower turning
+    sink_compensation: 0.010   # m; offsets contact penetration to keep the wheel radius
+
+arm:
+  kp: 200.0                # N*m/rad
+  dampratio: 1.0
+  armature: 0.05           # kg*m^2
+
+gripper:
+  kp: 500.0                # N/m
+  dampratio: 1.0
+  armature: 0.1            # kg
+
+imu:
+  link: imu_link
+  gyro_noise: 2.0e-4       # rad/s
+  accel_noise: 1.7e-2      # m/s^2

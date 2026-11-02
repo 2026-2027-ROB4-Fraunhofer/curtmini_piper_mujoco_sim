@@ -1,0 +1,47 @@
+#!/usr/bin/env python3
+"""Build the MuJoCo model and optionally open it in the MuJoCo viewer.
+
+    ros2 run curtmini_piper_mujoco_sim build_model --view
+"""
+
+import argparse
+from pathlib import Path
+
+from ament_index_python.packages import get_package_share_directory
+from curtmini_piper_gz_sim.gazebo import resolve_world
+from curtmini_piper_mujoco_sim.build import build, gz_sim_share
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__,
+                                     formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument('--arm-model', default='piper_x')
+    parser.add_argument('--use-hokuyo', default='true', choices=['true', 'false'])
+    parser.add_argument('--world', default='curtmini_piper')
+    parser.add_argument('--use-apriltags', action='store_true')
+    parser.add_argument('--apriltag-layout-file', default=None)
+    parser.add_argument('--initial-state-file', default=None)
+    parser.add_argument('--output-dir', default=None)
+    parser.add_argument('--view', action='store_true', help="open the result in MuJoCo's viewer")
+    args = parser.parse_args()
+
+    world = resolve_world(args.world, gz_sim_share(),
+                          Path(get_package_share_directory('neo_gz_worlds')))
+    result = build(arm_model=args.arm_model, use_hokuyo=args.use_hokuyo == 'true',
+                   initial_state_file=args.initial_state_file, output_dir=args.output_dir,
+                   world_file=world,
+                   apriltag_layout_file=(args.apriltag_layout_file
+                                         or gz_sim_share() / 'config' / 'apriltags.yaml')
+                   if args.use_apriltags else None)
+    model = result['model']
+    print(f'MuJoCo model: {result["mujoco_model"]}')
+    print(f'  bodies {model.nbody}, joints {model.njnt}, actuators {model.nu}, '
+          f'geoms {model.ngeom}, meshes {model.nmesh}, sensors {model.nsensor}')
+    if args.view:
+        # The Python viewer, because the lidar plugin is loaded in this process only.
+        import mujoco.viewer
+        mujoco.viewer.launch(model)
+
+
+if __name__ == '__main__':
+    main()

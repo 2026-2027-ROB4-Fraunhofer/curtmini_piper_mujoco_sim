@@ -1,0 +1,19 @@
+# Loaded after curtmini_piper_gz_sim/config/simulation_controllers.yaml: an extra controller and
+# one override.
+
+controller_manager:
+  ros__parameters:
+    imu_sensor_broadcaster:
+      type: imu_sensor_broadcaster/IMUSensorBroadcaster
+
+imu_sensor_broadcaster:
+  ros__parameters:
+    use_sim_time: true
+    sensor_name: imu_sensor
+    frame_id: imu_link
+
+# Skid-steer wheels slip when turning; measured on the MuJoCo base, this keeps odometry within a
+# few percent of the true turn rate from 0.25 to 2 rad/s (test_odometry_matches_motion).
+base_controller:
+  ros__parameters:
+    wheel_separation_multiplier: 1.18

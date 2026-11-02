@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>curtmini_piper_mujoco_sim</name>
+  <version>0.1.0</version>
+  <description>
+    MuJoCo simulation of Curt Mini with a Piper arm, with the same ROS 2 interfaces as
+    curtmini_piper_gz_sim.
+  </description>
+  <maintainer email="rohan.mishra@ipa.fraunhofer.de">Rohan</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <buildtool_depend>ament_cmake_python</buildtool_depend>
+
+  <exec_depend>curt_mini_teleop</exec_depend>
+  <exec_depend>curtmini_piper_description</exec_depend>
+  <exec_depend>curtmini_piper_gz_sim</exec_depend>
+  <exec_depend>curtmini_piper_h_gripper_moveit_config</exec_depend>
+  <exec_depend>curtmini_piper_l_gripper_moveit_config</exec_depend>
+  <exec_depend>curtmini_piper_moveit_config</exec_depend>
+  <exec_depend>curtmini_piper_x_gripper_moveit_config</exec_depend>
+
+  <exec_depend>ament_index_python</exec_depend>
+  <exec_depend>controller_manager</exec_depend>
+  <exec_depend>diff_drive_controller</exec_depend>
+  <exec_depend>imu_sensor_broadcaster</exec_depend>
+  <exec_depend>joint_state_broadcaster</exec_depend>
+  <exec_depend>joint_trajectory_controller</exec_depend>
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>mujoco_3d_lidar</exec_depend>
+  <exec_depend>mujoco_ros2_control</exec_depend>
+  <exec_depend>mujoco_ros2_control_plugins</exec_depend>
+  <exec_depend>neo_gz_worlds</exec_depend>
+  <exec_depend>python3-collada</exec_depend>
+  <exec_depend>python3-mujoco-pip</exec_depend>
+  <exec_depend>python3-trimesh-pip</exec_depend>
+  <exec_depend>python3-numpy</exec_depend>
+  <exec_depend>python3-pil</exec_depend>
+  <exec_depend>python3-yaml</exec_depend>
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>rviz2</exec_depend>
+  <exec_depend>sdformat_vendor</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>xacro</exec_depend>
+
+  <test_depend>ament_cmake_pytest</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

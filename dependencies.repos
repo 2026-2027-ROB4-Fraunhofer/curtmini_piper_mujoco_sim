@@ -1,0 +1,25 @@
+repositories:
+    curtmini_piper_gz_sim:
+        type: git
+        url: https://github.com/ipa-may/curtmini_piper_gz_sim.git
+        version: main
+
+    curt_mini:
+        type: git
+        url: https://github.com/ipa-may/curt_mini.git
+        version: main
+
+    curtmini_piper:
+        type: git
+        url: https://github.com/ipa-may/curtmini_piper.git
+        version: main
+
+    piper_driver/agx_arm_urdf:
+        type: git
+        url: https://github.com/ipa-may/agx_arm_urdf.git
+        version: main
+
+    neo_gz_worlds:
+        type: git
+        url: https://github.com/ipa-may/neo_gz_worlds.git
+        version: gz-harmonic
